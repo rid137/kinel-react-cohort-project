@@ -11,12 +11,8 @@ function Home() {
                     <span className="text-red-500">movie companion</span>
                 </h1>
                 <p className="text-xl text-gray-400 leading-relaxed">
-                    mansdb sdbnf nsb
+                    mansdb sdbnf nsbsndvswdhfvwbsdv
                 </p>
-
-                <section>
-                    this section is added for gtihub purposes
-                </section>
             </div>
         </main>
     )
