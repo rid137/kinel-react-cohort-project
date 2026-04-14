@@ -13,6 +13,10 @@ function Home() {
                 <p className="text-xl text-gray-400 leading-relaxed">
                     mansdb sdbnf nsb
                 </p>
+
+                <section>
+                    this section is added for gtihub purposes
+                </section>
             </div>
         </main>
     )
