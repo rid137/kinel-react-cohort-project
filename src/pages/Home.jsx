@@ -1,6 +1,34 @@
-import Header from "../components/Header"
-import Button from "../components/Button"
+// =============================================================================
+// src/pages/Home.jsx
+// =============================================================================
+// WEEK 2 — Introduction to React & JSX
+//
+// The landing page. Built in Week 2 as the very first React page students see.
+// Intentionally simple — pure JSX, no state, no API calls.
+//
+// Teaching progression:
+//   Week 2: Write this together in class — focus on JSX syntax and className
+//   Week 9: Buttons use useNavigate() for routing
+//
+// ─── EMOJIS USED IN THIS FILE ────────────────────────────────────────────────
+// 🎬 Film Clapperboard — hero icon
+//    Mac: Cmd+Ctrl+Space → search "clapper" | Win: Win+. → search "clapper"
+//    Copy: 🎬
+//
+// 🔥 Fire — "Trending Now" feature icon
+//    Mac: Cmd+Ctrl+Space → search "fire"  | Win: Win+. → search "fire"
+//    Copy: 🔥
+//
+// 🔍 Magnifying Glass — "Smart Search" feature icon
+//    Mac: Cmd+Ctrl+Space → search "magnifying" | Win: Win+. → search "search"
+//    Copy: 🔍
+//
+// 📋 Clipboard — "Your Watchlist" feature icon
+//    Mac: Cmd+Ctrl+Space → search "clipboard" | Win: Win+. → search "clipboard"
+//    Copy: 📋
+// =============================================================================
 
+import Button from "../components/Button";
 
 function Home() {
 
@@ -22,62 +50,106 @@ function Home() {
         },
     ]
 
+    const movieData = [
+        {
+            image: "../images/movieimg1.png",
+            title: "Tayo Action",
+            genre: "first second",
+            description: "this is the description"
+        },
+        {
+            image: "../images/movieimg1.png",
+            title: "Tayo Action",
+            genre: "first second",
+            description: "this is the description"
+        },
+        {
+            image: "../images/movieimg1.png",
+            title: "Tayo Action",
+            genre: "first second",
+            description: "this is the description"
+        },
+        {
+            image: "../images/movieimg1.png",
+            title: "Tayo Action",
+            genre: "first second",
+            description: "this is the description"
+        },
+        {
+            image: "../images/movieimg1.png",
+            title: "Tayo Action",
+            genre: "first second",
+            description: "this is the description"
+        },
+    ]
 
-    return (
-        <main className="min-h-[80vh] flex flex-col items-center justify-center text-center px-4 gap-8">
-            <Header />
-            {/* Hero icon */}
-            <span className="text-8xl">🎬</span>
 
-            {/* Headline — JSX lets us mix HTML-like syntax with JavaScript (Week 2) */}
-            <div className="max-w-2xl space-y-4">
-                <h1 className="text-5xl font-bold leading-tight">
-                    Your personal{" "}
-                    <span className="text-red-500">movie companion</span>
-                </h1>
-                <p className="text-xl text-gray-400 leading-relaxed">
-                    mansdb sdbnf nsbsndvswdhfvwbsdv
-                </p>
+  return (
+    <main className="min-h-[80vh] flex flex-col items-center justify-center text-center px-4 gap-8">
 
-                <div className="flex items-center justify-center gap-4">
-                    <Button label="Browse Movies" />
-                    <Button label="My Watchlist" />
-                </div>
+      {/* 🎬 Film Clapperboard — hero icon. See emoji guide at top of file. */}
+      <span className="text-8xl">🎬</span>
+
+      {/* Headline */}
+      <div className="max-w-2xl space-y-4">
+        <h1 className="text-5xl font-bold leading-tight">
+          Your personal{" "}
+          <span className="text-brand-500">movie companion</span>
+        </h1>
+        <p className="text-xl text-gray-400 leading-relaxed">
+          Discover trending films, search by title, save movies to your
+          watchlist, and never forget what to watch next.
+        </p>
+      </div>
+
+      {/* Call to action buttons */}
+        <div className="flex gap-4 flex-wrap justify-center">
+            <Button label="Browse Movies" />
+            <Button label="My Watchlist" />
+        </div>
+
+        {/*
+            Feature highlights — rendered from an array using .map() (Week 1).
+            This is the most common React rendering pattern: data → JSX.
+            Each item needs a unique 'key' prop so React can track the list.
+        */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-8 max-w-3xl w-full">
+            {[
+            // 🔥 Fire emoji — see emoji guide at top of file
+            { icon: "🔥", title: "Trending Now",   desc: "See what everyone is watching this week" },
+            // 🔍 Magnifying Glass emoji — see emoji guide at top of file
+            { icon: "🔍", title: "Smart Search",   desc: "Find any movie from our massive database" },
+            // 📋 Clipboard emoji — see emoji guide at top of file
+            { icon: "📋", title: "Your Watchlist", desc: "Save movies and track what you want to watch" },
+            ].map((feature) => (
+            <div
+                key={feature.title}
+                className="bg-gray-900 rounded-xl p-6 text-left hover:bg-gray-800 transition-colors"
+            >
+                <span className="text-3xl">{feature.icon}</span>
+                <h3 className="font-semibold mt-3 mb-1 text-white">{feature.title}</h3>
+                <p className="text-gray-400 text-sm">{feature.desc}</p>
             </div>
+            ))}
+        </div>
 
-            {/* Cards */}
-            {/* 1st card */}
-            <div className="flex items-center justify-center gap-8">
-                {
-                    homeCardsData.map((item) => (
-                        <article className="bg-slate-500 p-4 rounded-sm text-white">
-                            <span>{item.icon}</span>
-                            <h3>{item.title}</h3>
-                            <p>{item.description}</p>
-                        </article>
-                    ))
-                }
+        {/* <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-8 max-w-3xl w-full">
+            {
+                homeCardsData.map((item) => (
+                    <article className="bg-slate-500 p-4 rounded-sm text-white">
+                        <span>{item.icon}</span>
+                        <h3>{item.title}</h3>
+                        <p>{item.description}</p>
 
-                {/* <article className="bg-slate-500 p-4 rounded-sm text-white">
-                    <span>🔥</span>
-                    <h3>Trending Now</h3>
-                    <p>See what everyone is watching this week</p>
-                </article>
-                <article className="bg-slate-500 p-4 rounded-sm text-white">
-                    <span>🔎</span>
-                    <h3>Smart Search</h3>
-                    <p>Find any movie from our massive database</p>
-                </article>
-                <article className="bg-slate-500 p-4 rounded-sm text-white">
-                    <span>🔖</span>
-                    <h3>Your Watchlist</h3>
-                    <p>Save movies and track what you want to watch</p>
-                </article> */}
-            </div>
+                        <Button label="Watchlist" />
+                    </article>
+                ))
+            }
+        </div> */}
 
-        </main>
-    )
+
+    </main>
+  );
 }
 
-export default Home
-
+export default Home;
