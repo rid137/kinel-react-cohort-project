@@ -1,7 +1,4 @@
-const Button = ({label}) => {
-
-
-
+function Button ({label}) {
     return(
         <button>
             {label}
