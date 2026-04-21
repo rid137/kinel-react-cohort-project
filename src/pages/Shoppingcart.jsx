@@ -4,15 +4,21 @@
 
 import { useState } from "react";
 
+// [] => square brackets indicate an array. We use arrays in state when we want to
+// {} => curly braces indicate an object. We use objects in state when we want to
+// " " | '' => quotes indicate a string. We use strings in state when we want to store
+// `` => backticks indicate a template literal, which is a special kind of string that can include variables and expressions. We use template literals when we want to create a string that includes dynamic content, like `Hello, ${name}!`
+
+
 // 🛍️ Some sample products to add to the cart
-const PRODUCTS = [
+const products = [
   { id: 1, name: "Apples",  price: 1.50 },
   { id: 2, name: "Bread",   price: 2.00 },
   { id: 3, name: "Milk",    price: 1.20 },
   { id: 4, name: "Cheese",  price: 3.50 },
 ];
 
-function ShoppingCart() {
+const ShoppingCart = () => {
   // STATE 1: the list of items currently in the cart
   // We start with an empty array [] because the cart is empty at first
   const [items, setItems] = useState([]);
@@ -44,6 +50,13 @@ function ShoppingCart() {
   const totalPrice = items.reduce((sum, item) => sum + item.price, 0);
   const itemCount  = items.length;
 
+  function updateShowCart() {
+    return setIsOpen(!isOpen);
+  }
+
+  const updateShowCartWithArrow = () => {
+    return setIsOpen(!isOpen);
+  }
 
 //   const [greeting, setGreeting] = useState("Good morning");
 
@@ -56,13 +69,15 @@ function ShoppingCart() {
     // Ternary Operator
     // greeting === "Good morning" ? console.log("this is morning") : console.log("this is evening")    
 
+    
+
   return (
     <div className="max-w-lg mx-auto mt-10 px-4 font-sans">
       <h1 className="text-2xl font-bold mb-6">My Shop</h1>
 
       {/* ── PRODUCT LIST ── */}
       <div className="flex flex-col gap-3 mb-8">
-        {PRODUCTS.map(product => (
+        {products.map(product => (
           <div
             key={product.id}
             className="flex items-center justify-between border border-gray-200 rounded-lg px-4 py-3"
@@ -83,6 +98,11 @@ function ShoppingCart() {
       </div>
 
       {/* ── CART TOGGLE BUTTON ── */}
+      {/* isOpen = false; true */}
+      {/* isOpen = true; false */}
+      {/* {
+        `The value of isOpen is ${isOpen}`
+      } */}
       <button
         onClick={() => setIsOpen(!isOpen)}
         // !isOpen flips the value: false → true, true → false
@@ -116,7 +136,7 @@ function ShoppingCart() {
                       {item.name} — ${item.price.toFixed(2)}
                     </span>
                     <button
-                      onClick={() => removeItem(item.cartId)}
+                      onClick={() => removeItem(item.id)}
                       className="text-red-400 hover:text-red-600 text-lg leading-none cursor-pointer transition-colors"
                     >
                       ✕
@@ -127,7 +147,7 @@ function ShoppingCart() {
 
               {/* Total — derived from state, always up to date */}
               <p className="text-right font-bold mt-4 pt-3 border-t border-gray-100">
-                Total: ${totalPrice.toFixed(2)}
+                Total: ${totalPrice.toFixed(3)}
               </p>
             </>
           )}
