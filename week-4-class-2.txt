@@ -1,0 +1,11 @@
+Q1.
+What is a controlled component in React? Write a controlled <input> where the value is stored in useState and updates on every keystroke. Why is this called 'controlled' —
+what would an uncontrolled input look like instead?
+
+Answer => eurcbjhrchdrgjhsdhdsghjdgfjhsgj
+
+Q2.
+Write a sign-up form with three fields: username, email, and password. Use ONE handleChange function to handle all three inputs. Show how the [e.target.name] computed
+property key makes this possible. Remember to call e.preventDefault() on submit.
+
+Answer => jhreghcr hervehrvceh
