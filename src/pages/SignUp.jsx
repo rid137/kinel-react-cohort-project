@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const SignUp = () => {
   const [loading, setLoading] = useState(false);
+  const [posts, setPosts] = useState([]);
 
   const formInputsData = {
     username: "",
@@ -25,22 +26,77 @@ const SignUp = () => {
 
   }
 
+
+  const id = 2
+
+  
+
+  // 3 Types of dependency array
+  // 1. Empty array means useEffect would run only once when the page mount/render/show
+  useEffect(() => {
+    // setInterval(() => {
+    //   console.log("setInterval formData", formData)
+    //   setLoading(false);
+    // }, 2000);
+
+    fetch('https://jsonplaceholder.typicode.com/posts')
+      .then(response => response.json())
+      .then(json => setPosts(json))
+
+      
+  }, [])
+  // 2. Dependency array with values means useEffect would run only once, and then anytime the values in the array changes
+  useEffect(() => {
+    setInterval(() => {
+      console.log("setInterval formData", formData)
+      setLoading(false);
+    }, 2000);
+  }, [id])
+  // 3. No dependency array means useEffect is going to run once and anytime a value change in your page
+  useEffect(() => {
+    setInterval(() => {
+      console.log("setInterval formData", formData)
+      setLoading(false);
+    }, 2000);
+  })
+
+
   const handleSubmit = (e) => {
     setLoading(true);
     e.preventDefault();
 
-
+    // Timer events are generally side effects cos they are owned by browser
     setTimeout(() => {
       console.log("formData", formData)
       setLoading(false);
     }, 2000);
 
-
+    // setInterval(() => {
+    //   console.log("setInterval formData", formData)
+    //   setLoading(false);
+    // }, 2000);
   }
 
+  const age = 20
+
+  // strictly equals compare both type and value ===
+  // loosely equals compare only value ==
+  0 === false //Wrong
+  0 == false //Correct
+  !0 === true
 
   return (
     <div className="p-20">
+      {/* {0 && <p>Hello</p>} */}
+      {0 ? <p>Hello</p> : null}
+      {/* {age === 20 ? <p>The user is older</p> : <p>The user is younger</p>} */}
+
+      {
+        posts?.slice(0, 5)?.map((post) => (
+          <p>{post.title}</p>
+        ))
+      }
+
       <h2 className="mb-6 text-2xl text-blue-700 leading-tight tracking-wide">Register</h2>
       <form onSubmit={handleSubmit} className="">
 
