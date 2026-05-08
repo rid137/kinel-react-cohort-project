@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 const SignUp = () => {
   const [loading, setLoading] = useState(false);
   const [posts, setPosts] = useState([]);
+  const [singlePost, setSinglePost] = useState({});
+  console.log("singlePost", singlePost)
 
   const formInputsData = {
     username: "",
@@ -39,26 +41,29 @@ const SignUp = () => {
     //   setLoading(false);
     // }, 2000);
 
-    fetch('https://jsonplaceholder.typicode.com/posts')
+    // Synchronous === line by line execution 
+    // Asynchronous === async actions are pushed to queue in order to allow execution of subsequent lines of code. A way to handle async actions is by using PROMISE(is an object that encapsulate/houses the result of an async operation)
+
+    fetch('https://jsonplaceholder.typicode.com/posts/10')
       .then(response => response.json())
-      .then(json => setPosts(json))
+      .then(json => setSinglePost(json))
 
       
   }, [])
   // 2. Dependency array with values means useEffect would run only once, and then anytime the values in the array changes
-  useEffect(() => {
-    setInterval(() => {
-      console.log("setInterval formData", formData)
-      setLoading(false);
-    }, 2000);
-  }, [id])
+  // useEffect(() => {
+  //   setInterval(() => {
+  //     console.log("setInterval formData", formData)
+  //     setLoading(false);
+  //   }, 2000);
+  // }, [id])
   // 3. No dependency array means useEffect is going to run once and anytime a value change in your page
-  useEffect(() => {
-    setInterval(() => {
-      console.log("setInterval formData", formData)
-      setLoading(false);
-    }, 2000);
-  })
+  // useEffect(() => {
+  //   setInterval(() => {
+  //     console.log("setInterval formData", formData)
+  //     setLoading(false);
+  //   }, 2000);
+  // })
 
 
   const handleSubmit = (e) => {
